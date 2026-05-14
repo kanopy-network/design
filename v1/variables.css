@@ -1,8 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
    KANOPY DESIGN SYSTEM v1 — VARIABLES
-   All CSS custom properties for the Kanopy brand.
-   Link to kanopy.css for the full system, or this file alone
-   if you only need the variables in a custom stylesheet.
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── Self-hosted fonts ───────────────────────────────────────── */
@@ -75,22 +72,22 @@
 /* ── Light mode (default) ────────────────────────────────────── */
 :root {
   /* Surfaces */
-  --kny-bg:       #f5f3ec;   /* page background — warm off-white */
-  --kny-paper:    #ffffff;   /* card / panel surface */
-  --kny-paper-lo: #f0ede5;   /* dimmer surface, alternate panels */
+  --kny-bg:       #f5f3ec;
+  --kny-paper:    #ffffff;
+  --kny-paper-lo: #f0ede5;
 
   /* Ink */
-  --kny-ink:      #1a1a1a;   /* primary text, borders */
+  --kny-ink:      #1a1a1a;
   --kny-text:     #1a1a1a;
-  --kny-text-dim: rgba(26, 26, 26, 0.62);
+  --kny-text-dim: rgba(26, 26, 26, 0.65);
   --kny-mute:     #4a4a48;
 
   /* Accent */
-  --kny-yellow:   #f5c800;   /* primary accent */
-  --kny-gold:     #a07c00;   /* readable yellow on light bg (4.5:1 contrast) */
+  --kny-yellow:   #f5c800;
+  --kny-gold:     #a07c00;
 
   /* Status */
-  --kny-green:    #00c853;
+  --kny-green:    #00c060;
   --kny-red:      #e53935;
 
   /* Fonts */
@@ -107,43 +104,42 @@
   /* Shadows — neo-brutalist: solid offset, no blur */
   --shadow-sm:    3px 3px 0 rgba(26, 26, 26, 0.85);
   --shadow-md:    4px 4px 0 rgba(26, 26, 26, 0.85);
-  --shadow-lg:    6px 6px 0 rgba(26, 26, 26, 0.82);
+  --shadow-lg:    5px 5px 0 rgba(26, 26, 26, 0.82);
   --shadow-y:     3px 3px 0 var(--kny-yellow);
   --shadow-y-lg:  6px 6px 0 var(--kny-yellow);
 
+  /* Shape */
+  --radius: 3px;
+
   /* Layout */
-  --max-w:   1200px;
-  --pad-x:   48px;
-  --pad-y:   96px;
-  --radius:  2px;
+  --max-w:  1200px;
+  --pad-x:  48px;
+  --pad-y:  80px;
 }
 
 /* ── Dark mode ───────────────────────────────────────────────── */
 [data-theme="dark"] {
   --kny-bg:       #111111;
-  --kny-paper:    #1e1e1e;
-  --kny-paper-lo: #161616;
+  --kny-paper:    #1a1a1a;
+  --kny-paper-lo: #141414;
 
-  --kny-ink:      #f0ede5;
-  --kny-text:     #f0ede5;
-  --kny-text-dim: rgba(240, 237, 229, 0.65);
-  --kny-mute:     rgba(240, 237, 229, 0.55);
+  --kny-ink:      #f0f0f0;
+  --kny-text:     #f0f0f0;
+  --kny-text-dim: rgba(240, 240, 240, 0.65);
+  --kny-mute:     rgba(240, 240, 240, 0.55);
 
   --kny-gold:     #f5c800;
 
-  --border:       2px solid rgba(240, 237, 229, 0.22);
-  --border-thin:  1px solid rgba(240, 237, 229, 0.14);
-  --border-dim:   1.5px dashed rgba(240, 237, 229, 0.12);
+  --border:       2px solid rgba(240, 240, 240, 0.18);
+  --border-thin:  1px solid rgba(240, 240, 240, 0.12);
+  --border-dim:   1.5px dashed rgba(255, 255, 255, 0.12);
 
-  --shadow-sm:    3px 3px 0 rgba(245, 200, 0, 0.30);
-  --shadow-md:    4px 4px 0 rgba(245, 200, 0, 0.30);
-  --shadow-lg:    6px 6px 0 rgba(245, 200, 0, 0.28);
+  --shadow-sm:    3px 3px 0 rgba(245, 200, 0, 0.25);
+  --shadow-md:    4px 4px 0 rgba(245, 200, 0, 0.25);
+  --shadow-lg:    5px 5px 0 rgba(245, 200, 0, 0.22);
 }
 
-/* ── Responsive overrides ────────────────────────────────────── */
-@media (max-width: 960px) {
-  :root { --pad-x: 28px; --pad-y: 64px; }
-}
-@media (max-width: 640px) {
-  :root { --pad-x: 20px; --pad-y: 48px; }
-}
+/* ── Responsive layout tokens ────────────────────────────────── */
+@media (max-width: 1024px) { :root { --pad-x: 32px; } }
+@media (max-width:  860px) { :root { --pad-x: 24px; --pad-y: 64px; } }
+@media (max-width:  580px) { :root { --pad-x: 20px; --pad-y: 48px; } }
