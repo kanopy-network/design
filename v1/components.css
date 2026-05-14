@@ -426,35 +426,35 @@
   z-index: 50;
 }
 
-.kny-scroll-nav ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.kny-scroll-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
 
 .kny-scroll-nav a {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
   position: relative;
 }
 
+/* Dot — fixed size, circle → rounded square transition only */
 .kny-scroll-nav a span {
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  background: rgba(26, 26, 26, 0.22);
-  border: 1.5px solid rgba(26, 26, 26, 0.22);
+  background: transparent;
+  border: 1.5px solid rgba(26, 26, 26, 0.28);
   display: block;
-  transition: all 0.2s ease;
   flex-shrink: 0;
+  transition: border-radius 0.18s ease, background 0.18s ease, border-color 0.18s ease;
 }
 
-[data-theme="dark"] .kny-scroll-nav a span {
-  background: rgba(255,255,255,.18);
-  border-color: rgba(255,255,255,.18);
-}
+[data-theme="dark"] .kny-scroll-nav a span { border-color: rgba(255, 255, 255, 0.3); }
 
+/* Label — slides in from right on hover or active */
 .kny-scroll-nav a::after {
   content: attr(data-label);
   position: absolute;
-  right: 16px;
+  right: 18px;
   font-family: var(--font-mono);
   font-size: 10px;
   letter-spacing: 0.12em;
@@ -462,39 +462,32 @@
   color: var(--kny-ink);
   white-space: nowrap;
   opacity: 0;
-  transform: translateX(4px);
+  transform: translateX(6px);
   transition: opacity 0.15s ease, transform 0.15s ease;
-  background: var(--kny-bg);
-  padding: 2px 7px;
-  border: 1px solid rgba(26, 26, 26, 0.1);
-  border-radius: var(--radius);
   pointer-events: none;
 }
 
-[data-theme="dark"] .kny-scroll-nav a::after {
-  color: #f0f0f0;
-  background: rgba(17,17,17,.92);
-  border-color: rgba(255,255,255,.1);
-}
+[data-theme="dark"] .kny-scroll-nav a::after { color: rgba(255, 255, 255, 0.7); }
 
-.kny-scroll-nav a:hover::after { opacity: 1; transform: translateX(0); }
-
+/* Hover — rounded square, filled ink */
 .kny-scroll-nav a:hover span {
+  border-radius: 3px;
   background: var(--kny-ink);
   border-color: var(--kny-ink);
 }
 [data-theme="dark"] .kny-scroll-nav a:hover span {
-  background: #f0f0f0;
-  border-color: #f0f0f0;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.8);
 }
+.kny-scroll-nav a:hover::after { opacity: 1; transform: translateX(0); }
 
+/* Active — rounded square, yellow fill; label visible */
 .kny-scroll-nav a.active span {
+  border-radius: 3px;
   background: var(--kny-yellow);
-  border-color: var(--kny-gold);
-  box-shadow: 0 0 0 3px rgba(245, 200, 0, 0.2);
-  width: 7px;
-  height: 7px;
+  border-color: var(--kny-yellow);
 }
+.kny-scroll-nav a.active::after { opacity: 1; transform: translateX(0); }
 
 /* ── Terminal / console block ────────────────────────────────── */
 .kny-terminal {
