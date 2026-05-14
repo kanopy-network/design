@@ -119,9 +119,9 @@
 
 /* ── Dark mode ───────────────────────────────────────────────── */
 [data-theme="dark"] {
-  --kny-bg:       #111111;
-  --kny-paper:    #1a1a1a;
-  --kny-paper-lo: #141414;
+  --kny-bg:       #181818;
+  --kny-paper:    #242424;
+  --kny-paper-lo: #1e1e1e;
 
   --kny-ink:      #f0f0f0;
   --kny-text:     #f0f0f0;
@@ -130,13 +130,13 @@
 
   --kny-gold:     #f5c800;
 
-  --border:       2px solid rgba(240, 240, 240, 0.18);
-  --border-thin:  1px solid rgba(240, 240, 240, 0.12);
-  --border-dim:   1.5px dashed rgba(255, 255, 255, 0.12);
+  --border:       2px solid rgba(240, 240, 240, 0.22);
+  --border-thin:  1px solid rgba(240, 240, 240, 0.16);
+  --border-dim:   1.5px dashed rgba(255, 255, 255, 0.15);
 
-  --shadow-sm:    3px 3px 0 rgba(245, 200, 0, 0.25);
-  --shadow-md:    4px 4px 0 rgba(245, 200, 0, 0.25);
-  --shadow-lg:    5px 5px 0 rgba(245, 200, 0, 0.22);
+  --shadow-sm:    3px 3px 0 rgba(245, 200, 0, 0.38);
+  --shadow-md:    4px 4px 0 rgba(245, 200, 0, 0.38);
+  --shadow-lg:    5px 5px 0 rgba(245, 200, 0, 0.32);
 }
 
 /* ── Responsive layout tokens ────────────────────────────────── */

@@ -32,6 +32,10 @@
 }
 .kny-btn--primary:hover { box-shadow: 1px 1px 0 var(--kny-ink); }
 
+/* In dark mode --kny-ink is #f0f0f0 (white) — keep text dark on yellow */
+[data-theme="dark"] .kny-btn--primary { color: #1a1a1a; border-color: rgba(0, 0, 0, 0.35); }
+[data-theme="dark"] .kny-btn--primary:hover { box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5); }
+
 /* Arrow animation on primary hover */
 .kny-btn--primary::after {
   content: "→";
@@ -102,7 +106,7 @@
 }
 
 [data-theme="dark"] .kny-card { color: var(--kny-text); }
-[data-theme="dark"] .kny-card:hover { box-shadow: 7px 7px 0 rgba(245, 200, 0, 0.3); }
+[data-theme="dark"] .kny-card:hover { box-shadow: 7px 7px 0 rgba(245, 200, 0, 0.38); }
 
 /* Dark card (inverted, for featured items) */
 .kny-card--dark {
@@ -112,6 +116,13 @@
   box-shadow: var(--shadow-y-lg);
 }
 .kny-card--dark:hover { box-shadow: 8px 8px 0 var(--kny-yellow); }
+
+/* In dark mode --kny-ink is light — keep the card dark and elevated */
+[data-theme="dark"] .kny-card--dark {
+  background: #2c2c2c;
+  color: #f0f0f0;
+  border-color: rgba(245, 200, 0, 0.4);
+}
 
 /* ── Icon wrap ───────────────────────────────────────────────── */
 .kny-icon {
@@ -184,7 +195,7 @@
 .kny-ticker__val      { color: rgba(26, 26, 26, 0.88); font-weight: 700; letter-spacing: 0.1em; }
 .kny-ticker__divider  { width: 1px; height: 16px; background: rgba(26, 26, 26, 0.12); flex-shrink: 0; }
 
-[data-theme="dark"] .kny-ticker            { background: #0d0d0d; }
+[data-theme="dark"] .kny-ticker            { background: #1e1e1e; }
 [data-theme="dark"] .kny-ticker__lbl       { color: rgba(255, 255, 255, 0.38); }
 [data-theme="dark"] .kny-ticker__sep       { color: rgba(255, 255, 255, 0.18); }
 [data-theme="dark"] .kny-ticker__val       { color: rgba(255, 255, 255, 0.88); }
