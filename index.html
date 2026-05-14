@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kanopy Design System v1</title>
+  <link rel="stylesheet" href="v1/kanopy.css" />
+  <style>
+    /* Showcase-only styles — not part of the design system */
+    .ds-page { padding: 0 0 96px; }
+
+    .ds-hero {
+      padding: 80px 0 64px;
+      border-bottom: 2px solid var(--kny-ink);
+      margin-bottom: 80px;
+    }
+    .ds-hero-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--kny-gold);
+      margin-bottom: 16px;
+    }
+    .ds-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--kny-ink);
+      margin-bottom: 24px;
+    }
+    .ds-hero-sub {
+      font-size: 16px;
+      color: var(--kny-text-dim);
+      max-width: 520px;
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .ds-code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--kny-paper);
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 12px 16px;
+      display: inline-block;
+      color: var(--kny-gold);
+      border-radius: var(--radius);
+    }
+
+    .ds-section { margin-bottom: 80px; }
+    .ds-section-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--kny-gold);
+      border-left: 3px solid var(--kny-yellow);
+      padding-left: 10px;
+      margin-bottom: 32px;
+    }
+
+    .ds-row    { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
+    .ds-col-2  { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .ds-col-3  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .ds-col-4  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    .ds-swatch {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .ds-swatch__color {
+      width: 100%;
+      height: 64px;
+      border: var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .ds-swatch__name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--kny-text-dim);
+    }
+    .ds-swatch__value {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--kny-text);
+    }
+
+    .ds-type-row { margin-bottom: 16px; padding-bottom: 16px; border-bottom: var(--border-dim); }
+
+    .ds-shadow-box {
+      padding: 24px;
+      background: var(--kny-paper);
+      border: var(--border);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--kny-text-dim);
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .ds-col-2, .ds-col-3, .ds-col-4 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .ds-col-2, .ds-col-3, .ds-col-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script>
+    (function () {
+      var t = localStorage.getItem('kny-theme');
+      if (t === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+    })();
+  </script>
+</head>
+<body>
+
+<header class="kny-header">
+  <div class="kny-header__inner">
+    <a href="#" class="kny-brand">
+      <div class="kny-brand__logo">K</div>
+      <div>
+        <div class="kny-brand__name">Kanopy Design</div>
+        <div class="kny-brand__sub">Design System · v1</div>
+      </div>
+    </a>
+    <nav>
+      <ul class="kny-nav">
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#type">Typography</a></li>
+        <li><a href="#components">Components</a></li>
+      </ul>
+    </nav>
+    <button class="kny-theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+      <svg class="kny-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+      <svg class="kny-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/>
+        <line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/>
+        <line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <button class="kny-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="kny-mobile-menu" id="mobile-menu">
+  <a href="#colors">Colors</a>
+  <a href="#type">Typography</a>
+  <a href="#components">Components</a>
+</nav>
+
+<main class="ds-page">
+
+  <!-- HERO -->
+  <div class="ds-hero">
+    <div class="kny-container">
+      <div class="ds-hero-label">Kanopy Network · Design System</div>
+      <h1 class="ds-hero-title">v1</h1>
+      <p class="ds-hero-sub">
+        The single source of truth for Kanopy's visual identity.
+        Import <code>kanopy.css</code> and write only what's specific to your page.
+      </p>
+      <div class="ds-code">&lt;link rel="stylesheet" href="https://design.kanopy.network/v1/kanopy.css" /&gt;</div>
+    </div>
+  </div>
+
+  <div class="kny-container">
+
+    <!-- COLORS -->
+    <div class="ds-section" id="colors">
+      <div class="ds-section-title">01 — Colors</div>
+      <div class="ds-col-4">
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#f5f3ec;"></div>
+          <div class="ds-swatch__name">--kny-bg</div>
+          <div class="ds-swatch__value">#f5f3ec</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#ffffff;"></div>
+          <div class="ds-swatch__name">--kny-paper</div>
+          <div class="ds-swatch__value">#ffffff</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#f0ede5;"></div>
+          <div class="ds-swatch__name">--kny-paper-lo</div>
+          <div class="ds-swatch__value">#f0ede5</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#1a1a1a;"></div>
+          <div class="ds-swatch__name">--kny-ink</div>
+          <div class="ds-swatch__value">#1a1a1a</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#f5c800;border:2px solid #1a1a1a;"></div>
+          <div class="ds-swatch__name">--kny-yellow</div>
+          <div class="ds-swatch__value">#f5c800</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#a07c00;"></div>
+          <div class="ds-swatch__name">--kny-gold</div>
+          <div class="ds-swatch__value">#a07c00</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#00c853;"></div>
+          <div class="ds-swatch__name">--kny-green</div>
+          <div class="ds-swatch__value">#00c853</div>
+        </div>
+        <div class="ds-swatch">
+          <div class="ds-swatch__color" style="background:#e53935;"></div>
+          <div class="ds-swatch__name">--kny-red</div>
+          <div class="ds-swatch__value">#e53935</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="ds-section" id="type">
+      <div class="ds-section-title">02 — Typography</div>
+
+      <div class="ds-type-row">
+        <div class="kny-label" style="margin-bottom:8px">Display XL · Stick No Bills 800</div>
+        <div class="kny-display kny-display--xl">Networks & NixOS</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="kny-label" style="margin-bottom:8px">Display LG</div>
+        <div class="kny-display kny-display--lg">Sovereign by Design</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="kny-label" style="margin-bottom:8px">Display MD</div>
+        <div class="kny-display kny-display--md">Open Infrastructure</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="kny-label" style="margin-bottom:8px">Display SM</div>
+        <div class="kny-display kny-display--sm">Zero Telemetry</div>
+      </div>
+      <div class="ds-type-row">
+        <div class="kny-label" style="margin-bottom:8px">Accent underline</div>
+        <div class="kny-display kny-display--lg"><span class="kny-accent">Sovereign.</span></div>
+      </div>
+      <div class="ds-type-row">
+        <div class="kny-label" style="margin-bottom:8px">Body · Inter 400</div>
+        <p style="max-width:520px">Kanopy Network builds open, NixOS-powered infrastructure for organizations that value sovereignty, auditability, and independence from Big Tech.</p>
+      </div>
+      <div class="ds-type-row">
+        <div class="kny-label" style="margin-bottom:8px">Mono label · JetBrains Mono</div>
+        <div class="kny-label">01 — Section label · EST. 2026 · NODE-00</div>
+      </div>
+    </div>
+
+    <!-- SHADOWS -->
+    <div class="ds-section">
+      <div class="ds-section-title">03 — Shadows</div>
+      <div class="ds-col-4">
+        <div class="ds-shadow-box" style="box-shadow:var(--shadow-sm)">--shadow-sm<br/>3px 3px</div>
+        <div class="ds-shadow-box" style="box-shadow:var(--shadow-md)">--shadow-md<br/>4px 4px</div>
+        <div class="ds-shadow-box" style="box-shadow:var(--shadow-lg)">--shadow-lg<br/>6px 6px</div>
+        <div class="ds-shadow-box" style="box-shadow:var(--shadow-y-lg)">--shadow-y-lg<br/>6px 6px yellow</div>
+      </div>
+    </div>
+
+    <!-- COMPONENTS -->
+    <div class="ds-section" id="components">
+      <div class="ds-section-title">04 — Buttons</div>
+      <div class="ds-row">
+        <a href="#" class="kny-btn kny-btn--primary">Primary button</a>
+        <a href="#" class="kny-btn kny-btn--secondary">Secondary button</a>
+        <a href="#" class="kny-btn kny-btn--ghost">Ghost button</a>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-section-title">05 — Cards</div>
+      <div class="ds-col-3">
+        <div class="kny-card">
+          <div class="kny-label" style="margin-bottom:12px">Default card</div>
+          <p style="font-size:14px;color:var(--kny-text-dim)">Standard white card with solid border and offset shadow. Lifts slightly on hover.</p>
+        </div>
+        <div class="kny-card kny-card--dark">
+          <div class="kny-label" style="margin-bottom:12px;color:var(--kny-yellow)">Dark card</div>
+          <p style="font-size:14px;opacity:.75">Inverted card for featured content. Yellow shadow, lifts on hover.</p>
+        </div>
+        <div class="kny-card" style="background:var(--kny-paper-lo);opacity:.7">
+          <div class="kny-label" style="margin-bottom:12px">Muted card</div>
+          <p style="font-size:14px;color:var(--kny-text-dim)">Dimmed surface for placeholders or disabled states.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-section-title">06 — Icon wrap</div>
+      <div class="ds-row">
+        <div class="kny-icon kny-icon--sm" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--kny-ink)" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="kny-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--kny-ink)" stroke-width="2"><path d="M12 2l8 4v6c0 5.5-8 10-8 10S4 17.5 4 12V6l8-4z"/></svg>
+        </div>
+        <div class="kny-icon kny-icon--lg" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--kny-ink)" stroke-width="2"><rect x="2" y="2" width="20" height="8"/><rect x="2" y="14" width="20" height="8"/></svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-section-title">07 — Badges</div>
+      <div class="ds-row">
+        <span class="kny-badge kny-badge--ok">Online</span>
+        <span class="kny-badge kny-badge--warn">Updating</span>
+        <span class="kny-badge kny-badge--live">Live</span>
+        <span class="kny-badge kny-badge--coming">Coming soon</span>
+      </div>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-section-title">08 — Section scaffold</div>
+      <div class="kny-section-head">
+        <span class="kny-section-num">01 — Example</span>
+        <span class="kny-section-tag">Tag label</span>
+      </div>
+      <h2 class="kny-display kny-display--lg" style="margin-bottom:16px">
+        Section heading.<br/><span class="kny-accent">With accent.</span>
+      </h2>
+      <p class="kny-section-sub">This is the section-sub style — used for the short descriptive paragraph that follows a section heading.</p>
+    </div>
+
+    <div class="ds-section">
+      <div class="ds-section-title">09 — Terminal block</div>
+      <div style="max-width:520px">
+        <div class="kny-terminal">
+          <div class="kny-terminal__bar">
+            <span class="kny-terminal__dot kny-terminal__dot--r"></span>
+            <span class="kny-terminal__dot kny-terminal__dot--y"></span>
+            <span class="kny-terminal__dot kny-terminal__dot--g"></span>
+            <span class="kny-terminal__title">kanopy · node-00</span>
+          </div>
+          <div class="kny-terminal__body">
+            <div><span class="kny-terminal__ok">[ OK ]</span> NixOS config validated</div>
+            <div><span class="kny-terminal__warn">[ WARN ]</span> 1 node updating</div>
+            <div><span class="kny-terminal__info">[ INFO ]</span> Sovereignty: ✓ PASS</div>
+            <div class="kny-terminal__dim">────────────────────────────</div>
+            <div><span class="kny-terminal__prompt">$</span>koad deploy --all<span class="kny-terminal__cursor">▋</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+
+  <!-- TAPE -->
+  <div class="kny-tape" aria-hidden="true" style="margin-top:48px">
+    <div class="kny-tape__track">
+      <span class="kny-tape__item"><span class="kny-tape__label">hosting</span><span class="kny-tape__value">FRANCE</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">telemetry</span><span class="kny-tape__value">ZERO</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">open source</span><span class="kny-tape__value">100%</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">vendor lock</span><span class="kny-tape__value">NONE</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">OS</span><span class="kny-tape__value">NIXOS</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">audit</span><span class="kny-tape__value">OPEN</span></span>
+      <!-- duplicate for seamless loop -->
+      <span class="kny-tape__item"><span class="kny-tape__label">hosting</span><span class="kny-tape__value">FRANCE</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">telemetry</span><span class="kny-tape__value">ZERO</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">open source</span><span class="kny-tape__value">100%</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">vendor lock</span><span class="kny-tape__value">NONE</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">OS</span><span class="kny-tape__value">NIXOS</span></span>
+      <span class="kny-tape__item"><span class="kny-tape__label">audit</span><span class="kny-tape__value">OPEN</span></span>
+    </div>
+  </div>
+
+</main>
+
+<footer class="kny-footer">
+  <div class="kny-footer__inner">
+    <span class="kny-footer__copy">© 2026 Kanopy Network — Design System v1</span>
+    <div class="kny-footer__links">
+      <a href="https://kanopy.network">kanopy.network</a>
+      <span class="kny-footer__sep">·</span>
+      <a href="https://github.com/kanopy-network" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<nav class="kny-scroll-nav" aria-label="Section navigation">
+  <ul>
+    <li><a href="#colors"     data-label="Colors"></a></li>
+    <li><a href="#type"       data-label="Typography"></a></li>
+    <li><a href="#components" data-label="Components"></a></li>
+  </ul>
+</nav>
+
+<script>
+(function () {
+  var toggle = document.getElementById('theme-toggle');
+  var root = document.documentElement;
+  toggle.addEventListener('click', function () {
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    isDark ? root.removeAttribute('data-theme') : root.setAttribute('data-theme', 'dark');
+    localStorage.setItem('kny-theme', isDark ? 'light' : 'dark');
+  });
+
+  var hamburger = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function () {
+    var open = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(open));
+  });
+
+  var navLinks = document.querySelectorAll('.kny-scroll-nav a');
+  var sections = Array.from(navLinks).map(function (a) {
+    return document.querySelector(a.getAttribute('href'));
+  }).filter(Boolean);
+  function onScroll() {
+    var y = window.scrollY + window.innerHeight / 3;
+    var cur = sections[0];
+    sections.forEach(function (s) { if (s.offsetTop <= y) cur = s; });
+    navLinks.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + cur.id);
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>

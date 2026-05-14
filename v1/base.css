@@ -1,0 +1,158 @@
+/* ═══════════════════════════════════════════════════════════════
+   KANOPY DESIGN SYSTEM v1 — BASE
+   Reset, body, grid overlay, typography, layout helpers.
+   Depends on variables.css being loaded first.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Reset ───────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--kny-bg);
+  color: var(--kny-text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  min-height: 100vh;
+  transition: background 0.25s, color 0.25s;
+}
+
+/* Grid overlay — subtle diagonal lines on the background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M 80 0 L 0 0 0 80' fill='none' stroke='%230d0d0d' stroke-opacity='.045' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+  background-position: top left;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.25s;
+}
+
+[data-theme="dark"] body::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cpath d='M 80 0 L 0 0 0 80' fill='none' stroke='%23ffffff' stroke-opacity='.05' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* Radial vignette — adds subtle depth */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 55%, rgba(0,0,0,.12) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content renders above the body overlays */
+body > * { position: relative; z-index: 1; }
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+strong { font-weight: 700; }
+
+/* ── Layout ──────────────────────────────────────────────────── */
+.kny-container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+/* ── Typography ──────────────────────────────────────────────── */
+
+/* Display headings — Stick No Bills, uppercase */
+.kny-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--kny-ink);
+}
+.kny-display--xl { font-size: clamp(40px, 6.5vw, 88px); }
+.kny-display--lg { font-size: clamp(30px, 4.5vw, 60px); }
+.kny-display--md { font-size: clamp(24px, 3.2vw, 44px); }
+.kny-display--sm { font-size: clamp(18px, 2.2vw, 28px); }
+
+/* Accent — yellow underline */
+.kny-accent {
+  text-decoration: underline;
+  text-decoration-color: var(--kny-yellow);
+  text-decoration-thickness: 4px;
+  text-underline-offset: 6px;
+}
+
+/* Mono label — small caps, tracking, gold */
+.kny-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--kny-gold);
+}
+
+/* ── Sections ────────────────────────────────────────────────── */
+.kny-section {
+  padding: var(--pad-y) 0;
+}
+
+.kny-section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  margin-bottom: 56px;
+  padding-bottom: 16px;
+  border-bottom: var(--border-dim);
+}
+
+.kny-section-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--kny-gold);
+  white-space: nowrap;
+  border-left: 3px solid var(--kny-yellow);
+  padding-left: 10px;
+}
+
+.kny-section-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kny-text-dim);
+  opacity: 0.5;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.kny-section-sub {
+  font-size: 16px;
+  color: var(--kny-text-dim);
+  line-height: 1.7;
+  max-width: 580px;
+  margin-bottom: 48px;
+}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes kny-blink    { 50% { opacity: 0; } }
+@keyframes kny-dot-jump {
+  0%, 60%, 100% { transform: translateY(0);    opacity: 0; }
+  20%           { transform: translateY(-5px); opacity: 1; }
+  40%           { transform: translateY(0);    opacity: 1; }
+}

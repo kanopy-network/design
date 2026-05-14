@@ -1,0 +1,15 @@
+/* ═══════════════════════════════════════════════════════════════
+   KANOPY DESIGN SYSTEM v1 — FULL BUNDLE
+   Import this single file in your project:
+
+     <link rel="stylesheet" href="https://design.kanopy.network/v1/kanopy.css" />
+
+   Or import individual layers if you only need part of the system:
+     v1/variables.css  — CSS custom properties only
+     v1/base.css       — reset, body, typography, layout
+     v1/components.css — buttons, cards, header, footer, tape…
+   ═══════════════════════════════════════════════════════════════ */
+
+@import "variables.css";
+@import "base.css";
+@import "components.css";
